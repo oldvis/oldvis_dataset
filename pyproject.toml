@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "oldvis-dataset"
+version = "0.1.0"
+description = ""
+authors = ["Yu Zhang <yuzhang94@outlook.com>"]
+readme = "README.md"
+packages = [{include = "oldvis_dataset"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+tqdm = "^4.65.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
