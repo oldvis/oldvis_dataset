@@ -69,7 +69,18 @@ def fetch_images(
     queries = filter_queries(metadata, img_dir)
     for query in tqdm(queries, desc="Fetch Image Progress"):
         uuid = query["uuid"]
-        response = s.get(query["downloadUrl"])
-        extension = mimetypes.guess_extension(response.headers["content-type"])
-        with open(f"{img_dir}/{uuid}{extension}", "wb") as f:
-            f.write(response.content)
+        try:
+            response = s.get(query["downloadUrl"])
+            extension = mimetypes.guess_extension(response.headers["content-type"])
+            with open(f"{img_dir}/{uuid}{extension}", "wb") as f:
+                f.write(response.content)
+            if extension is None:
+                # convert to jpg via PIL
+                img = Image.open(f"{img_dir}/{uuid}{extension}")
+                img = img.convert("RGB")
+                img.save(f"{img_dir}/{uuid}.jpg")
+                os.remove(f"{img_dir}/{uuid}{extension}")
+
+        except requests.exceptions.ConnectionError:
+            print(f"ConnectionError: {uuid}")
+            continue
