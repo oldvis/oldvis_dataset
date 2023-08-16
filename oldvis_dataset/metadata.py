@@ -42,6 +42,6 @@ class Dataset:
     def download(self, path: str) -> None:
         try:
             download(self.url, path)
-        except ConnectionError as e:
-            print("Download failed because of connection error.")
+        except (ConnectionError, TimeoutError) as e:
+            print("Download failed because of network connection issue.")
             raise e
