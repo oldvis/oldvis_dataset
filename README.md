@@ -18,13 +18,45 @@ A Python package for downloading metadata and images of old visualizations in [o
 pip install oldvis_dataset
 ```
 
-## Usage
+## Usage Example
+
+Downloading metadata of visualizations:
+
+```python
+from oldvis_dataset import visualizations
+visualizations.download(path="./visualizations.json")
+```
+
+Downloading images:
+
+```python
+from oldvis_dataset import visualizations, fetch_image
+visualizations.download(path="./visualizations.json")
+fetch_images(metadata_path="./visualizations.json", img_dir="./images/")
+```
+
+Downloading images with filtering condition:
+
+```python
+import json
+from oldvis_dataset import visualizations, fetch_image
+metadata = visualizations.load()
+# Download public domain images.
+metadata = [d for d in metadata if d["rights"] == "public domain"]
+path = "./visualizations.json"
+with open(path, "w", encoding="utf-8") as f:
+    json.dump(metadata, ensure_ascii=False)
+fetch_image(metadata_path=path, img_dir="./images/")
+```
+
+## API
 
 ### `oldvis_dataset.visualizations`
 
 #### `oldvis_dataset.visualizations.download(path: str) -> None`
 
 Request the [metadata of visualizations](https://github.com/oldvis/dataset/blob/main/dataset/output/visualizations.json) and store at `path`.
+Each store metadata entry follows the data structure `ProcessedMetadataEntry` ([Source](https://github.com/oldvis/libprocess/blob/main/libprocess/typing.py)).
 
 ```python
 visualizations.download(path="./visualizations.json")
@@ -63,3 +95,5 @@ Fetch images and store at `img_dir` according to the URLs in the downloaded meta
 ```python
 fetch_images(metadata_path="./visualizations.json", img_dir="./images/")
 ```
+
+⚠️The image fetching can be slow.
