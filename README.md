@@ -97,3 +97,11 @@ fetch_images(metadata_path="./visualizations.json", img_dir="./images/")
 ```
 
 ⚠️The image fetching can be slow.
+
+### `oldvis_dataset.save_as_bib(metadata_path: str, bib_path: str) -> None`
+
+Save the fetched metadata at `metadata_path` as a BibTeX file and store at `bib_path`.
+
+```python
+save_as_bib(metadata_path="./visualizations.json", bib_path="./visualizations.bib")
+```

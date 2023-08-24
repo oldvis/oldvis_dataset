@@ -1,3 +1,4 @@
+from .bib import save_as_bib
 from .images import fetch_images
 from .metadata import Dataset
 
@@ -13,6 +14,7 @@ authors = Dataset(
 )
 
 __all__ = [
+    "save_as_bib",
     "Dataset",
     "visualizations",
     "authors",

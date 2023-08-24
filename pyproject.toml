@@ -10,6 +10,9 @@ packages = [{include = "oldvis_dataset"}]
 python = "^3.10"
 requests = "^2.31.0"
 tqdm = "^4.65.0"
+bibtexparser = {version = "^2.0.0b2", allow-prereleases = true}
+langcodes = "^3.3.0"
+language-data = "^1.1"
 
 
 [tool.poetry.group.dev.dependencies]
