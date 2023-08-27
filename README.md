@@ -30,7 +30,7 @@ visualizations.download(path="./visualizations.json")
 Downloading images:
 
 ```python
-from oldvis_dataset import visualizations, fetch_image
+from oldvis_dataset import visualizations, fetch_images
 visualizations.download(path="./visualizations.json")
 fetch_images(metadata_path="./visualizations.json", img_dir="./images/")
 ```
@@ -39,14 +39,14 @@ Downloading images with filtering condition:
 
 ```python
 import json
-from oldvis_dataset import visualizations, fetch_image
+from oldvis_dataset import visualizations, fetch_images
 metadata = visualizations.load()
 # Download public domain images.
 metadata = [d for d in metadata if d["rights"] == "public domain"]
 path = "./visualizations.json"
 with open(path, "w", encoding="utf-8") as f:
     json.dump(metadata, ensure_ascii=False)
-fetch_image(metadata_path=path, img_dir="./images/")
+fetch_images(metadata_path=path, img_dir="./images/")
 ```
 
 ## API
